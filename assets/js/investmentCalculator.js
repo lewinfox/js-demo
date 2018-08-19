@@ -74,8 +74,15 @@ const addChart = (e) => {
     let rate = components.rateInput.value;
     let period = components.periodInput.value;
 
-    createChart(amount, rate, period);
-    components.canvas.style.display = "block";
+    if (!amount || ! rate || !period) {
+        components.finalValue.innerHTML = `
+        <div class="alert alert-danger" role="alert">
+            Looks like something is missing...
+        </div>`
+    } else {
+        createChart(amount, rate, period);
+        components.canvas.style.display = "block";
+    }
 }
 
 components.submitButton.addEventListener("click", addChart);

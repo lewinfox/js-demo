@@ -1,9 +1,23 @@
+document.getElementById("curr-submit").addEventListener("click", () => {
+    let amount, prefix, minorLimit, majorSep, decimalSep, currString;
+    amount = document.getElementById("curr-amount").value;
+    prefix = document.getElementById("curr-prefix").value;
+    minorLimit = document.getElementById("curr-minor-units-limit").value;
+    majorSep = document.getElementById("curr-major-unit-sep").value;
+    decimalSep = document.getElementById("curr-decimal-sep").value;
+    if (amount) {
+        currString = formatCurrency(amount, prefix, minorLimit, majorSep, decimalSep);
+        document.getElementById("curr-output").innerHTML = `<strong>${currString}</strong>`;
+    } else {
+        alert("No amount provided - please try again");
+    }
+})
+
 function formatCurrency(amount,
                         prefix = '£',
                         displayMinorUnitsLimit = 10000,
                         majorSep = ',',
-                        decimalSep = '.')
-{
+                        decimalSep = '.') {
 
     let major, minor;
     let truncateMinorUnits = parseFloat(amount) >= displayMinorUnitsLimit;

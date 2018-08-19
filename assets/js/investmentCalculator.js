@@ -41,6 +41,10 @@ function createChart(amount, annualRate, months) {
                         }
                     }
                 }]
+            },
+            title: {
+                display: true,
+                text: "Projected monthly investment growth"
             }
         }
     }

@@ -1,5 +1,11 @@
 body {
     font-family: sans-serif;
+    max-width: 900px;
+    margin: auto;
+}
+
+header {
+    margin: 2%;
 }
 
 legend {
@@ -11,6 +17,11 @@ legend {
     margin: 2%;
     padding: 5px;
     border: 1px solid black;
+    border-radius: 5px;
+}
+
+.container input {
+    align: right;
 }
 
 .chart-container {

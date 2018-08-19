@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="css/master.css">
+        <link rel="stylesheet" href="assets/css/master.css">
         <title>JavaScript projects</title>
     </head>
     <body>
@@ -10,42 +10,64 @@
             <h1>JavaScript projects</h1>
         </header>
         <div class="container">
-            <p>Some interesting JS project ideas</p>
+            <legend>Currency formatting function</legend>
+            <p>Apply currency formatting to numbers. The function signature is:</p>
+            <pre><code>formatCurrency(amount,
+               prefix = '£',
+               displayMinorUnitsLimit = 10000,
+               majorSep = ',',
+               decimalSep = '.')</code></pre>
+            <p>The <code>displayMinorUnitsLimit</code> parameter sets the value
+                below which minor currency units (pence, cents) will be displayed.
+                The function rounds fractional numbers to two decimal places.
+            <p>
+                <label for="curr-amount">Amount to format</label><br>
+                <input id="curr-amount" type="number">
+            </p>
+            <p>
+                <label for="curr-prefix">Prefix</label><br>
+                <input id="curr-prefix" type="text" value="£">
+            </p>
+            <p>
+                <label for="curr-minor-units-limit">Minor units limit</label><br>
+                <input id="curr-minor-units-limit" type="text" value="10000">
+            </p>
+            <p>
+                <label for="curr-major-sep">Major unit separator</label><br>
+                <input id="curr-major-unit-sep" type="text" value=",">
+            </p>
+            <p>
+                <label for="curr-decimal-sep">Decimal separator</label><br>
+                <input id="curr-decimal-sep" type="text" value=".">
+            </p>
+            <p>
+                <input id="curr-submit" type="submit" value="Format">
+            </p>
+            <div id="curr-output">
+
+            </div>
         </div>
-        <div class="container">
-            <form>
-                <legend>Tip calculator</legend>
-                <p>
-                    <label for="net-bill">Net bill</label>
-                    <input id="net-bill" type="number" name="bill">
-                </p>
-                <p>
-                    <label for="tip-rate">Tip rate (%)</label>
-                    <input id="tip-rate" type="number" name="tip-rate" value="10">
-                </p>
-                <p>
-                    <button id="calc-tip" type="button" name="calc-tip">Calculate tip</button>
-                </p>
-                <p id="total-amount"></p>
-            </form>
-        </div>
+
         <div class="container">
             <form>
                 <legend>Investment calculator</legend>
+                <p>Calculates simple investment returns and uses chart.js to
+                plot the results. The chart's y axis is formatted with the
+                <code>currencyFormat</code> function.</p>
                 <p>
-                    <label for="investment-amount">Investment amount</label>
-                    <input id="investment-amount" type="number" name="investment-amount" value="1000">
+                    <label for="investment-amount">Investment amount</label><br>
+                    <input id="investment-amount" type="number"placeholder="£">
                 </p>
                 <p>
-                    <label for="growth-rate">Assumed growth rate</a>
-                    <input id="growth-rate" type="number" name="growth-rate" placeholder="Enter a value in %">
+                    <label for="growth-rate">Assumed growth rate</label><br>
+                    <input id="growth-rate" type="number" placeholder="Enter a value in %">
                 </p>
                 <p>
-                    <label for="investment-period">Investment period (months)</a>
-                    <input id="investment-period" type="number" name="investment-period" value="12">
+                    <label for="investment-period">Investment period (months)</label><br>
+                    <input id="investment-period" type="number" value="12">
                 </p>
                 <p>
-                    <input id="calc-investment" type="submit" name="calc-investment" value="Calculate">
+                    <input id="calc-investment" type="submit" value="Calculate">
                 </p>
                 <div class="chart-container">
                     <canvas id="investment-chart" class="chart"></canvas>
@@ -55,8 +77,7 @@
 
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
-        <script type="text/javascript" src="js/formatCurrency.js"></script>
-        <script type="text/javascript" src="js/tipCalculator.js"></script>
-        <script type="text/javascript" src="js/investmentCalculator.js"></script>
+        <script type="text/javascript" src="assets/js/formatCurrency.js"></script>
+        <script type="text/javascript" src="assets/js/investmentCalculator.js"></script>
     </body>
 </html>

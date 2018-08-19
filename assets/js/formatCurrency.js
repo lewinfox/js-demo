@@ -1,12 +1,16 @@
 document.getElementById("curr-submit").addEventListener("click", (e) => {
+
     e.preventDefault();
+
     let amount, prefix, minorLimit, majorSep, decimalSep, currString;
+
     amount = document.getElementById("curr-amount").value;
     prefix = document.getElementById("curr-prefix").value;
     minorLimit = document.getElementById("curr-minor-units-limit").value;
     majorSep = document.getElementById("curr-major-unit-sep").value;
     decimalSep = document.getElementById("curr-decimal-sep").value;
     output = document.getElementById("curr-output");
+
     if (amount) {
         currString = formatCurrency(amount, prefix, minorLimit, majorSep, decimalSep);
         output.innerHTML = `<div class="alert alert-success">${currString}</div>`;
@@ -14,22 +18,29 @@ document.getElementById("curr-submit").addEventListener("click", (e) => {
         output.innerHTML = `<div class="alert alert-danger" role="alert">
         No amount was supplied - please try again
         </div>`;
-
     }
 })
 
-function formatCurrency(amount,
+const formatCurrency = (amount,
                         prefix = '£',
                         displayMinorUnitsLimit = 10000,
                         majorSep = ',',
-                        decimalSep = '.') {
+                        decimalSep = '.') => {
 
     let major, minor;
+
+    // Handle negatives
+    if (amount < 0) {
+        amount = Math.abs(amount);
+        prefix = '-' + prefix;
+    }
+
+    // Are we going to display minor units?
     let truncateMinorUnits = parseFloat(amount) >= displayMinorUnitsLimit;
 
     // Define a rounding function to handle input like 123.4567.  Note that this
     // will not insert decimals - 10 is not converted to 10.00
-    function round(number, decimals) {
+    const round = (number, decimals) => {
 
         if (typeof(number) != 'number') {
             number = parseFloat(number);
@@ -39,7 +50,8 @@ function formatCurrency(amount,
             decimals = parseInt(decimals);
         }
 
-        // Allow positive and negative values for "decimals"
+        // Allow positive and negative values for "decimals". While not relevant
+        // for currency, this might be useful in other scenarios
         if (decimals < 0) {
             decimals = Math.abs(decimals);
             // Decrease the size of the number by (decimals) orders of magnitude,
@@ -61,10 +73,9 @@ function formatCurrency(amount,
         amount = round(amount, 2);
     }
 
-
     // We need a string to split out major and minor units
     if (typeof(amount) == 'number') {
-        amount = amount.toString();
+        amount = amount.toString();  // TODO: rewrite with int() and %?
     }
 
     // Split on decimal point if there is one
@@ -72,10 +83,13 @@ function formatCurrency(amount,
         amount = amount.split('.');
         major = amount[0];           // Pounds, dollars
         minor = amount[1];           // Pence, cents
+
         if (minor.length == 1) {
+            // Pad single-digit decimals (e.g. 10.5 => 10.50)
             minor += "0";
         }
     } else {
+        // If no decimal point, manually generate "00" for minor units
         major = amount;
         minor = "00";
     }

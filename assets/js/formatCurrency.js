@@ -29,10 +29,20 @@ function formatCurrency(amount,
         if (typeof(number) != 'number') {
             number = parseFloat(number);
         }
+        // Increase the size of the number by (decimals) orders of magntude,
+        // use the built-in round function to round the result, and then reduce
+        // by (decimals) OOM again.
         return Number(Math.round(number + 'e' + decimals) + 'e-' + decimals)
     }
 
-    amount = round(amount, 2);
+    if (truncateMinorUnits) {
+        // Round to nearest major unit
+        amount = round(amount, 0);
+    } else {
+        // Round to nearest minor unit
+        amount = round(amount, 2);
+    }
+
 
     // We need a string to split out major and minor units
     if (typeof(amount) == 'number') {

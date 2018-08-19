@@ -1,21 +1,27 @@
-let components = {
+// In the event that the HTML changes in future, this gives us a single place
+// to change input mappings. Subsequent functions can refer to components.foo
+// rather than needing multiple document.getElement... calls
+const components = {
+    amountInput: document.getElementById("investment-amount"),
+    periodInput: document.getElementById("investment-period"),
+    rateInput: document.getElementById("growth-rate"),
     submitButton: document.getElementById("calc-investment"),
     canvas: document.getElementById("investment-chart")
 }
 
-function calculateReturn(amount, annualRate, months) {
-    let returns = [];
+const calculateReturn = (amount, annualRate, months) => {
 
+    let projections = [];
     let monthlyRate = (1 + (annualRate / 100))**(1/12);
 
     for (let i = 0; i <= months; i++) {
         let value = amount * (monthlyRate ** i);
-        returns.push({month: i, value: value})
+        projections.push({month: i, value: value})
     }
-    return returns;
+    return projections;
 }
 
-function createChart(amount, annualRate, months) {
+const createChart = (amount, annualRate, months) => {
 
     let returns = calculateReturn(amount, annualRate, months);
     let labs = returns.map(a => a.month);
@@ -52,14 +58,16 @@ function createChart(amount, annualRate, months) {
     let myChart = new Chart(components.canvas, chartOptions);
 }
 
-components.submitButton.addEventListener("click", (e) => {
+const addChart = (e) => {
 
     e.preventDefault();
 
-    let amount = document.getElementById("investment-amount").value;
-    let period = document.getElementById("investment-period").value;
-    let rate = document.getElementById("growth-rate").value;
+    let amount = components.amountInput.value;
+    let rate = components.rateInput.value;
+    let period = components.periodInput.value;
 
     createChart(amount, rate, period);
     components.canvas.style.display = "block";
-})
+}
+
+components.submitButton.addEventListener("click", addChart);

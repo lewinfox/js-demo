@@ -12,3 +12,13 @@ legend {
     padding: 5px;
     border: 1px solid black;
 }
+
+.chart-container {
+    width: 95%;
+    height: 100%;
+}
+
+.chart {
+    display: none;
+    margin: auto;
+}

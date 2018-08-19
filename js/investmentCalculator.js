@@ -1,5 +1,5 @@
 let components = {
-    submit: document.getElementById("calc-investment"),
+    submitButton: document.getElementById("calc-investment"),
     canvas: document.getElementById("investment-chart")
 }
 
@@ -35,7 +35,10 @@ function createChart(amount, annualRate, months) {
             scales: {
                 yAxes: [{
                     ticks: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        callback: function(value, index, values) {
+                            return formatCurrency(value);
+                        }
                     }
                 }]
             }
@@ -45,7 +48,7 @@ function createChart(amount, annualRate, months) {
     let myChart = new Chart(components.canvas, chartOptions);
 }
 
-components.submit.addEventListener("click", (e) => {
+components.submitButton.addEventListener("click", (e) => {
 
     e.preventDefault();
 

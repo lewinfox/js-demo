@@ -6,7 +6,8 @@ const components = {
     periodInput: document.getElementById("investment-period"),
     rateInput: document.getElementById("growth-rate"),
     submitButton: document.getElementById("calc-investment"),
-    canvas: document.getElementById("investment-chart")
+    canvas: document.getElementById("investment-chart"),
+    finalValue: document.getElementById("inv-final-value")
 }
 
 const calculateReturn = (amount, annualRate, months) => {
@@ -57,6 +58,12 @@ const createChart = (amount, annualRate, months) => {
     }
 
     let myChart = new Chart(components.canvas, chartOptions);
+
+    components.finalValue.innerHTML = `
+    <div class="alert alert-info" role="alert">
+        Final value: ${formatCurrency(finalValue)}
+    </div>`
+
 }
 
 const addChart = (e) => {

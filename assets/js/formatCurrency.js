@@ -1,15 +1,20 @@
-document.getElementById("curr-submit").addEventListener("click", () => {
+document.getElementById("curr-submit").addEventListener("click", (e) => {
+    e.preventDefault();
     let amount, prefix, minorLimit, majorSep, decimalSep, currString;
     amount = document.getElementById("curr-amount").value;
     prefix = document.getElementById("curr-prefix").value;
     minorLimit = document.getElementById("curr-minor-units-limit").value;
     majorSep = document.getElementById("curr-major-unit-sep").value;
     decimalSep = document.getElementById("curr-decimal-sep").value;
+    output = document.getElementById("curr-output");
     if (amount) {
         currString = formatCurrency(amount, prefix, minorLimit, majorSep, decimalSep);
-        document.getElementById("curr-output").innerHTML = `<strong>${currString}</strong>`;
+        output.innerHTML = `<div class="alert alert-success">${currString}</div>`;
     } else {
-        alert("No amount provided - please try again");
+        output.innerHTML = `<div class="alert alert-danger" role="alert">
+        No amount was supplied - please try again
+        </div>`;
+
     }
 })
 

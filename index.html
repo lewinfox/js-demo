@@ -2,16 +2,25 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/css/master.css">
         <title>JavaScript projects</title>
     </head>
     <body>
-        <header>
-            <h1>JavaScript projects</h1>
-        </header>
+        <div class="pb-2 mt-4 mb-2 border-bottom">
+            <div class="container">
+                <h1>JavaScript demo</h1>
+                <p>Two utility functions written in JavaScript. Page styling with Bootstrap.</p>
+            </div>
+        </div>
         <div class="container">
             <legend>Currency formatting function</legend>
-            <p>Apply currency formatting to numbers. The function signature is:</p>
+            <p>Given a numeric input (or string that can be converted using
+                <code>parseFloat()</code>), this function returns a
+                currency-formatted string. The currency symbol, major unit separator,
+                decimal separator and printing behaviour of minor units can be
+                controlled. The function signature is:</p>
             <pre><code>formatCurrency(amount,
                prefix = '£',
                displayMinorUnitsLimit = 10000,
@@ -19,62 +28,92 @@
                decimalSep = '.')</code></pre>
             <p>The <code>displayMinorUnitsLimit</code> parameter sets the value
                 below which minor currency units (pence, cents) will be displayed.
-                The function rounds fractional numbers to two decimal places.
-            <p>
-                <label for="curr-amount">Amount to format</label><br>
-                <input id="curr-amount" type="number">
-            </p>
-            <p>
-                <label for="curr-prefix">Prefix</label><br>
-                <input id="curr-prefix" type="text" value="£">
-            </p>
-            <p>
-                <label for="curr-minor-units-limit">Minor units limit</label><br>
-                <input id="curr-minor-units-limit" type="text" value="10000">
-            </p>
-            <p>
-                <label for="curr-major-sep">Major unit separator</label><br>
-                <input id="curr-major-unit-sep" type="text" value=",">
-            </p>
-            <p>
-                <label for="curr-decimal-sep">Decimal separator</label><br>
-                <input id="curr-decimal-sep" type="text" value=".">
-            </p>
-            <p>
-                <input id="curr-submit" type="submit" value="Format">
-            </p>
-            <div id="curr-output">
-
+                Input is rounded to the nearest major or minor unit depending
+                on whether <code>displayMinorUnitsLimit</code> has been exceeded
+                or not.</p>
+            <div class="container">
+                <form>
+                    <div class="form-group row">
+                        <label for="curr-amount" class="col-4 col-form-label">Amount to format</label>
+                        <div class="col-8">
+                            <input class="form-control" id="curr-amount" type="number">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="curr-prefix" class="col-4 col-form-label">Prefix</label>
+                        <div class="col-8">
+                            <input class="form-control" id="curr-prefix" type="text" value="£">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="curr-minor-units-limit" class="col-4 col-form-label">Minor units limit</label>
+                        <div class="col-8">
+                            <input class="form-control" id="curr-minor-units-limit" type="text" value="10000">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="curr-major-sep" class="col-4 col-form-label">Major unit separator</label>
+                        <div class="col-8">
+                            <input class="form-control" id="curr-major-unit-sep" type="text" value=",">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="curr-decimal-sep" class="col-4 col-form-label">Decimal separator</label>
+                        <div class="col-8">
+                            <input class="form-control" id="curr-decimal-sep" type="text" value=".">
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <button class="btn btn-outline-primary btn-lg btn-block" id="curr-submit">Format</button>
+                            </div>
+                            <div class="col-6"  id="curr-output">
+                                <div class="alert alert-secondary" role="alert">
+                                  Formatted string will appear here
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
+
+        </div>
+
+        <div class="container">
+            <hr>
         </div>
 
         <div class="container">
             <form>
                 <legend>Investment calculator</legend>
                 <p>Calculates simple investment returns and uses chart.js to
-                plot the results. The chart's y axis is formatted with the
+                plot the results. The annual percentage return provided is
+                converted to a monthly equivalent, and a month-by-month breakdown
+                is provided. The chart's y axis is formatted with the
                 <code>currencyFormat</code> function.</p>
-                <p>
+                <div class="form-group">
                     <label for="investment-amount">Investment amount</label><br>
-                    <input id="investment-amount" type="number"placeholder="£">
-                </p>
-                <p>
+                    <input class="form-control" id="investment-amount" type="number"placeholder="£">
+                </div>
+                <div class="form-group">
                     <label for="growth-rate">Assumed annual growth rate</label><br>
-                    <input id="growth-rate" type="number" placeholder="Enter a value in %">
-                </p>
-                <p>
+                    <input class="form-control" id="growth-rate" type="number" placeholder="Enter a value in %">
+                </div>
+                <div class="form-group">
                     <label for="investment-period">Investment period (months)</label><br>
-                    <input id="investment-period" type="number" value="12">
-                </p>
-                <p>
-                    <input id="calc-investment" type="submit" value="Calculate">
-                </p>
-                <div class="chart-container">
-                    <canvas id="investment-chart" class="chart"></canvas>
+                    <input class="form-control" id="investment-period" type="number" value="12">
+                </div>
+                <div class="container">
+                    <div class="form-group">
+                        <button class="btn btn-outline-primary btn-lg btn-block" id="calc-investment">Calculate</button>
+                    </div>
                 </div>
             </form>
 
-
+            <div class="container chart-container">
+                <canvas id="investment-chart" class="chart"></canvas>
+            </div>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
         <script type="text/javascript" src="assets/js/formatCurrency.js"></script>

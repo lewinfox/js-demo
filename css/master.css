@@ -2,6 +2,11 @@ body {
     font-family: sans-serif;
 }
 
+legend {
+    font-size: 1.2em;
+    text-align: center;
+}
+
 .container {
     margin: 2%;
     padding: 5px;

@@ -30,10 +30,28 @@
             </form>
         </div>
         <div class="container">
-            <h2>Investment calculator</h2>
+            <form>
+                <legend>Investment calculator</legend>
+                <p>
+                    <label for="investment-amount">Investment amount</label>
+                    <input id="investment-amount" type="numeric" name="investment-amount">
+                </p>
+                <p>
+                    <label for="growth-rate">Assumed growth rate</a>
+                    <input id="growth-rate" type="numeric" name="growth-rate" value="5">
+                </p>
+                <p>
+                    <label for="investment-period">Investment period (months)</a>
+                    <input id="investment-period" type="numeric" name="investment-period" value="12">
+                </p>
+                <p>
+                    <input id="calc-investment" type="submit" name="calc-investment" value="Calculate">
+                </p>
+            </form>
+
 
         </div>
-        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/tipCalculator.js"></script>
         <script type="text/javascript" src="js/formatCurrency.js"></script>
     </body>
 </html>

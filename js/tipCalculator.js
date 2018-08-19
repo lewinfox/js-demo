@@ -1,5 +1,4 @@
 window.onload = function() {
-    console.log('app.js connected');
 
     document.getElementById('calc-tip').addEventListener('click', () => {
         let net, tipRate, tip, total;

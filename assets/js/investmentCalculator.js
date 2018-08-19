@@ -26,6 +26,7 @@ const createChart = (amount, annualRate, months) => {
     let returns = calculateReturn(amount, annualRate, months);
     let labs = returns.map(a => a.month);
     let values = returns.map(a => a.value);
+    let finalValue = values[values.length - 1];
 
     let chartOptions = {
         type: "line",
